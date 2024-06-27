@@ -59,7 +59,7 @@ docker compose up -d
 1. Using curl: 
     - Post Receipt to get id
     ```bash
-    curl POST   -H "Content-Type: application/json"   -d '{
+    curl -X POST   -H "Content-Type: application/json"   -d '{
       "retailer": "M&M Corner Market",
       "purchaseDate": "2022-03-20",
       "purchaseTime": "14:33",
