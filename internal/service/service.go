@@ -45,7 +45,6 @@ func (s *ReceiptService) GetPointsById(id string) (int, error) {
 
 // CalculatePoints calculates the points for a given receipt.
 func (s *ReceiptService) CalculatePoints(receipt models.Receipt) int {
-	// Todo: Refactor CalculatePoints by abstracting rules.
 	log.Println("ReceiptService::CalculatePoints: calculating points for receipt")
 	points := 0
 	rules := []Rule{
