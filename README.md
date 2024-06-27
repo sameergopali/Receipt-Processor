@@ -22,9 +22,9 @@ You will need the following installed on your local machine
 - docker -- [install guide](https://docs.docker.com/get-docker/)
 - [go](https://go.dev/doc/install) v1.21.1+ 
 -  [swag](https://github.com/swaggo/swag) : This project uses  swag to generate swagger documentation for the apis.
-```bash 
-go install github.com/swaggo/swag/cmd/swag@latest
-```
+    ```bash 
+    go install github.com/swaggo/swag/cmd/swag@latest
+    ```
 
 You can build and run using any of the following options
 ####  Using Go
