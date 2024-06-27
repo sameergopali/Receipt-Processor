@@ -14,12 +14,13 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
-// @title Swagger Example API
+// @title Receipt Processor API
 // @version 1.0
-// @description This is a sample Swagger server.
+// @description This is an api developed for Fetch Rewards receipt processor challenge.
 // @host localhost:8080
 // @BasePath /
 
+// main is the entry point for the application
 func main() {
 	loadConfig()
 
@@ -30,11 +31,12 @@ func main() {
 	router := mux.NewRouter()
 	setupRoutes(router, receiptHandler)
 
-	addr := viper.GetString("server.address") + ":" + viper.GetString("server.port")
+	addr := ":" + viper.GetString("server.port")
 	log.Println("Server started on", addr)
 	log.Fatal(http.ListenAndServe(addr, router))
 }
 
+// setupRoutes sets up the HTTP routes for the application.
 func setupRoutes(router *mux.Router, handler *handler.ReceiptHandler) {
 	router.HandleFunc("/receipts/process", handler.ProcessReceipt).Methods("POST")
 	router.HandleFunc("/receipts/{id}/points", handler.GetPointsById).Methods("GET")
@@ -42,6 +44,7 @@ func setupRoutes(router *mux.Router, handler *handler.ReceiptHandler) {
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 }
 
+// loadConfig loads the configuration from a file
 func loadConfig() {
 	viper.AddConfigPath("./config")
 	viper.SetConfigName("config")

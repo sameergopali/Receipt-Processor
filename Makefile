@@ -17,13 +17,13 @@ SWAGGER_OUT=./docs
 SWAGGER_DIR=./cmd,./internal
 
 # Targets
-all: test build
+all: test swagger build
 
 build:
 	$(GOBUILD) -o $(BINARY_NAME) $(MAIN)
 
 test:
-	$(GOTEST) -v .tests/...
+	$(GOTEST) -v ./tests/...
 
 clean:
 	$(GOCLEAN)

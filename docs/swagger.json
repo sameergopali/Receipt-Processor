@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample Swagger server.",
-        "title": "Swagger Example API",
+        "description": "This is an api developed for Fetch Rewards receipt processor challenge.",
+        "title": "Receipt Processor API",
         "contact": {},
         "version": "1.0"
     },
