@@ -35,4 +35,4 @@ run:
 swagger:
 	swag init  -d $(SWAGGER_DIR) -o $(SWAGGER_OUT)
 
-.PHONY: all build test clean run format swagger
+.PHONY: all build test clean run swagger
