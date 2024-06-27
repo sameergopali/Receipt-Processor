@@ -15,9 +15,12 @@ RUN apt update && apt install  make git
 
 # Copy the rest of the application source code
 COPY . .
+RUN ls -l
 
-# Build the Go app
-RUN make build
+# Install swagger
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+# Build application
+RUN make all
 
 # Staging 
 FROM alpine:latest 

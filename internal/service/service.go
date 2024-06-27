@@ -12,18 +12,18 @@ import (
 
 // ReceiptService provides services related to processing receipts.
 type ReceiptService struct {
-	repo *repository.Repository
+	repo repository.Repository
 }
 
 // NewReceiptService creates a new instance of ReceiptService.
-func NewReceiptService(repo *repository.Repository) *ReceiptService {
+func NewReceiptService(repo repository.Repository) *ReceiptService {
 	return &ReceiptService{repo: repo}
 }
 
 // ProcessReceipt processes a receipt and returns the receipt ID.
 func (s *ReceiptService) ProcessReceipt(receipt models.Receipt) (string, error) {
 	log.Println("ReceiptService::ProcessReceipt: started processing receipt")
-	points := s.CalcuatePoints(receipt)
+	points := s.CalculatePoints(receipt)
 	id, err := s.repo.AddEntry(points)
 	if err != nil {
 		log.Printf("ReceiptService::ProcessReceipt: error adding receipt entry: %v\n", err)
@@ -48,7 +48,8 @@ func (s *ReceiptService) GetPointsById(id string) (int, error) {
 }
 
 // CalculatePoints calculates the points for a given receipt.
-func (s *ReceiptService) CalcuatePoints(receipt models.Receipt) int {
+func (s *ReceiptService) CalculatePoints(receipt models.Receipt) int {
+	// Todo: Refactor CalculatePoints by abstracting rules.
 	log.Println("ReceiptService::CalculatePoints: calculating points for receipt")
 	points := 0
 
@@ -83,16 +84,23 @@ func (s *ReceiptService) CalcuatePoints(receipt models.Receipt) int {
 	}
 
 	// Rule 6: 6 points if the day in the purchase date is odd
-	// 6 points if the day in the purchase date is odd.
-	date, _ := time.Parse("2006-01-02", receipt.PurchaseDate)
-	if date.Day()%2 != 0 {
-		points += 6
+	date, err := time.Parse("2006-01-02", receipt.PurchaseDate)
+	if err != nil {
+		log.Printf("CalculatePoints: error parsing purchase date: %v\n", err)
+	} else {
+		if date.Day()%2 != 0 {
+			points += 6
+		}
 	}
 
-	// 10 points if the time of purchase is after 2:00pm and before 4:00pm.
-	time, _ := time.Parse("15:04", receipt.PurchaseTime)
-	if time.Hour() == 14 {
-		points += 10
+	//Rule 7: 10 points if the time of purchase is after 2:00pm and before 4:00pm.
+	time, err := time.Parse("15:04", receipt.PurchaseTime)
+	if err != nil {
+		log.Printf("CalculatePoints: error parsing purchase time: %v\n", err)
+	} else {
+		if time.Hour() >= 14 && time.Hour() < 16 {
+			points += 10
+		}
 	}
 
 	return points

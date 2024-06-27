@@ -19,12 +19,10 @@ import (
 // @description This is an api developed for Fetch Rewards receipt processor challenge.
 // @host localhost:8080
 // @BasePath /
-
-// main is the entry point for the application
 func main() {
 	loadConfig()
 
-	receiptRepo := repository.NewRepository()
+	receiptRepo := repository.NewMemRepository()
 	receiptService := service.NewReceiptService(receiptRepo)
 	receiptHandler := handler.NewReceiptHandler(receiptService)
 

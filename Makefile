@@ -13,8 +13,8 @@ MAIN=cmd/main.go
 BINARY_NAME=main
 
 # Swagger parameters
-SWAGGER_OUT=./docs
-SWAGGER_DIR=./cmd,./internal
+SWAGGER_OUT=docs
+SWAGGER_DIR=cmd,internal
 
 # Targets
 all: test swagger build
@@ -33,6 +33,6 @@ run:
 	$(GORUN)  $(MAIN)
 
 swagger:
-	swag init  -o $(SWAGGER_OUT) -d $(SWAGGER_DIR)
+	swag init  -d $(SWAGGER_DIR) -o $(SWAGGER_OUT)
 
 .PHONY: all build test clean run format swagger

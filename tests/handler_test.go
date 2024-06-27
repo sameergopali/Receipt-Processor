@@ -22,7 +22,7 @@ type testSetup struct {
 }
 
 func setup() *testSetup {
-	mockRepo := repository.NewRepository()
+	mockRepo := repository.NewMemRepository()
 	mockService := service.NewReceiptService(mockRepo)
 	handler := handler.NewReceiptHandler(mockService)
 

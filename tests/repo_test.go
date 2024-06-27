@@ -9,7 +9,7 @@ import (
 
 func TestRepository_GetById(t *testing.T) {
 	// Initialize a new mock repository
-	mockRepo := repository.NewRepository()
+	mockRepo := repository.NewMemRepository()
 	generateId, _ := mockRepo.AddEntry(12)
 
 	tests := []struct {
@@ -39,7 +39,7 @@ func TestRepository_GetById(t *testing.T) {
 }
 
 func TestRepository_Create(t *testing.T) {
-	mockRepo := repository.NewRepository()
+	mockRepo := repository.NewMemRepository()
 	id1, err1 := mockRepo.AddEntry(10)
 	id2, err2 := mockRepo.AddEntry(20)
 	t.Run("RepoAddEntry Test", func(t *testing.T) {

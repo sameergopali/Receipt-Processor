@@ -51,12 +51,12 @@ func TestCalculatePoints(t *testing.T) {
 		},
 	}
 
-	repo := &repository.Repository{} // Mock testing repository
+	repo := repository.MemRepository{} // Mock testing repository
 
 	service := service.NewReceiptService(repo)
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			point := service.CalcuatePoints(test.receipt)
+			point := service.CalculatePoints(test.receipt)
 			assert.Equal(t, test.expected, point, "Failed tested")
 		})
 	}
