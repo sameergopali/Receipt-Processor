@@ -90,11 +90,13 @@ docker compose up -d
 2. Use Swagger: The swagger endpoint is available at http://localhost:8080/swagger/index.html. You can test and execute the post and get request in the UI
 
 ### Project Details
-This project is designed to handle receipt processing in-memory and is only storing the receipt id and points. The Points are calculated based on predefined rules such as retailer name length, total amount characteristics, item descriptions, purchase date and time.
+This project is built using the Go programming language and employs the Gorilla Mux package to route API calls. The service is designed to process receipts and calculate points based on predefined rules. It handles receipt processing entirely in-memory without relying on any external database, storing only the receipt ID and calculated points. It only stores the calculated points and genereted id in memory. 
 
 ### Next Steps
 Some further enhancements that can be done are:
 - Adding input validation and error handling for API requests.
+- Replace the in-memory storage with a persistent database solution to store receipt and points information.
+- Modify the API to generate a unique ID for each receipt only once, even if the same receipt is submitted multiple times.
 - Implementing different logging level and metrics to monitor service performance.
-- Adding and extending unit tests to cover additional edge cases as not all unit tests have been added due to time constraints.
+- Adding units test for all business logic and extending unit tests to cover additional edge cases as not all unit tests have been added due to time constraints.
 
